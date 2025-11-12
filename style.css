@@ -348,7 +348,7 @@ body {
 .chatbot-container {
     position: fixed;
     bottom: 20px;
-    right: 20px;
+    right: 420px;
     z-index: 1000;
 }
 
