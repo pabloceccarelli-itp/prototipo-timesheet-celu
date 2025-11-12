@@ -1,39 +1,51 @@
 
-// Chatbot functionality
-const chatbotButton = document.getElementById('chatbotButton');
-const chatbotWidget = document.getElementById('chatbotWidget');
-const chatbotClose = document.getElementById('chatbotClose');
-const chatbotInput = document.getElementById('chatbotInput');
-const chatbotSend = document.getElementById('chatbotSend');
-const chatbotMessages = document.getElementById('chatbotMessages');
+// Chatbot functionality - WhatsApp Interface
+const whatsappInput = document.getElementById('whatsappInput');
+const whatsappSend = document.getElementById('whatsappSend');
+const whatsappMessages = document.getElementById('whatsappMessages');
 
-chatbotButton.addEventListener('click', function () {
-    chatbotWidget.classList.toggle('open');
-});
+// Función para obtener la hora actual formateada
+function getCurrentTime() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+}
 
-chatbotClose.addEventListener('click', function () {
-    chatbotWidget.classList.remove('open');
-});
-
-// Función para agregar mensaje
+// Función para agregar mensaje en WhatsApp
 function addMessage(text, isUser = false) {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+    const messageWrapper = document.createElement('div');
+    messageWrapper.className = `whatsapp-message ${isUser ? 'user' : 'bot'}`;
+    
+    const messageContent = document.createElement('div');
+    messageContent.className = 'whatsapp-message-content';
     // Convertir saltos de línea a <br> para HTML
-    messageDiv.innerHTML = text.replace(/\n/g, '<br>');
-    chatbotMessages.appendChild(messageDiv);
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    return messageDiv;
+    messageContent.innerHTML = text.replace(/\n/g, '<br>');
+    
+    const messageTime = document.createElement('div');
+    messageTime.className = 'whatsapp-message-time';
+    messageTime.textContent = getCurrentTime();
+    
+    messageWrapper.appendChild(messageContent);
+    messageWrapper.appendChild(messageTime);
+    whatsappMessages.appendChild(messageWrapper);
+    whatsappMessages.scrollTop = whatsappMessages.scrollHeight;
+    return messageWrapper;
 }
 
 // Función para mostrar animación "Pensando"
 function showThinking() {
+    const thinkingWrapper = document.createElement('div');
+    thinkingWrapper.className = 'whatsapp-message thinking';
+    
     const thinkingDiv = document.createElement('div');
-    thinkingDiv.className = 'thinking';
-    thinkingDiv.innerHTML = '<div class="thinking-dot"></div><div class="thinking-dot"></div><div class="thinking-dot"></div>';
-    chatbotMessages.appendChild(thinkingDiv);
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    return thinkingDiv;
+    thinkingDiv.className = 'whatsapp-thinking';
+    thinkingDiv.innerHTML = '<div class="whatsapp-thinking-dot"></div><div class="whatsapp-thinking-dot"></div><div class="whatsapp-thinking-dot"></div>';
+    
+    thinkingWrapper.appendChild(thinkingDiv);
+    whatsappMessages.appendChild(thinkingWrapper);
+    whatsappMessages.scrollTop = whatsappMessages.scrollHeight;
+    return thinkingWrapper;
 }
 
 // Función para remover animación "Pensando"
@@ -43,10 +55,10 @@ function removeThinking(thinkingDiv) {
     }
 }
 
-
 // Función para mostrar confirmación
 function showConfirmation(message, onConfirm, onCancel) {
-    const messageDiv = addMessage(message, false);
+    const messageWrapper = addMessage(message, false);
+    const messageContent = messageWrapper.querySelector('.whatsapp-message-content');
     
     const buttonsDiv = document.createElement('div');
     buttonsDiv.className = 'confirmation-buttons';
@@ -55,7 +67,7 @@ function showConfirmation(message, onConfirm, onCancel) {
     yesBtn.className = 'confirm-btn yes';
     yesBtn.textContent = 'Sí';
     yesBtn.onclick = function() {
-        messageDiv.remove();
+        messageWrapper.remove();
         onConfirm();
     };
     
@@ -63,22 +75,21 @@ function showConfirmation(message, onConfirm, onCancel) {
     noBtn.className = 'confirm-btn no';
     noBtn.textContent = 'No';
     noBtn.onclick = function() {
-        messageDiv.remove();
+        messageWrapper.remove();
         if (onCancel) onCancel();
     };
     
     buttonsDiv.appendChild(yesBtn);
     buttonsDiv.appendChild(noBtn);
-    messageDiv.appendChild(buttonsDiv);
+    messageContent.appendChild(buttonsDiv);
 }
-
 
 // Función principal para enviar mensaje
 function sendMessage() {
-    const message = chatbotInput.value.trim();
+    const message = whatsappInput.value.trim();
     if (message) {
         addMessage(message, true);
-        chatbotInput.value = '';
+        whatsappInput.value = '';
         
         // Mostrar animación "Pensando"
         const thinkingDiv = showThinking();
@@ -104,8 +115,8 @@ function sendMessage() {
     }
 }
 
-chatbotSend.addEventListener('click', sendMessage);
-chatbotInput.addEventListener('keypress', function (e) {
+whatsappSend.addEventListener('click', sendMessage);
+whatsappInput.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
         sendMessage();
     }

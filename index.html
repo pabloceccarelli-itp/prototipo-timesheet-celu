@@ -92,10 +92,49 @@
                 </div>
             </div>
         </div>
+
+        <!-- Smartphone Mockup -->
+        <div class="smartphone-container">
+            <div class="smartphone-frame">
+                <div class="smartphone-screen">
+                    <!-- WhatsApp-like Chat Interface -->
+                    <div class="whatsapp-chat">
+                        <!-- Chat Header -->
+                        <div class="whatsapp-header">
+                            <div class="whatsapp-header-content">
+                                <div class="whatsapp-avatar">TS</div>
+                                <div class="whatsapp-header-info">
+                                    <h4>Asistente Timesheet</h4>
+                                    <span class="whatsapp-status">en línea</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Messages Container -->
+                        <div class="whatsapp-messages" id="whatsappMessages">
+                            <div class="whatsapp-message bot">
+                                <div class="whatsapp-message-content">
+                                    ¡Hola! 👋 Soy tu asistente de Timesheet. Estoy aquí para ayudarte a gestionar tus horas de trabajo. ¿En qué puedo ayudarte hoy?
+                                </div>
+                                <div class="whatsapp-message-time">Ahora</div>
+                            </div>
+                        </div>
+
+                        <!-- Input Container -->
+                        <div class="whatsapp-input-container">
+                            <input type="text" class="whatsapp-input" id="whatsappInput" placeholder="Escribe un mensaje...">
+                            <button class="whatsapp-send" id="whatsappSend">
+                                <i class="material-icons">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Chatbot Widget -->
-    <div class="chatbot-container">
+    <!-- Chatbot Widget (Oculto) -->
+    <div class="chatbot-container" style="display: none;">
         <div class="chatbot-widget" id="chatbotWidget">
             <div class="chatbot-header">
                 <h3>Asistente de Timesheet</h3>
