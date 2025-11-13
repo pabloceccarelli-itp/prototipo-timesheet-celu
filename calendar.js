@@ -355,7 +355,7 @@ let tasksDatabase = [
         detalle: "Ajustes de accesibilidad"
     }
     // --- FIN DE NUEVAS TAREAS ---
-    ,{
+    , {
         id_tarea: 1,
         id_usuario: 7,
         usuario: "Pablo",
@@ -418,11 +418,11 @@ let tasksDatabase = [
 ];
 
 const usuarios_proyectos = [
-    { id_usuario: 1, usuario: "Daniel", proyecto: "Alfa", id_usuario_lider :null},
-    { id_usuario: 2, usuario: "Juan", proyecto: "Alfa", id_usuario_lider :null },
-    { id_usuario: 3, usuario: "María", proyecto: "Alfa", id_usuario_lider: 1},
+    { id_usuario: 1, usuario: "Daniel", proyecto: "Alfa", id_usuario_lider: null },
+    { id_usuario: 2, usuario: "Juan", proyecto: "Alfa", id_usuario_lider: null },
+    { id_usuario: 3, usuario: "María", proyecto: "Alfa", id_usuario_lider: 1 },
     { id_usuario: 4, usuario: "Nicolás", proyecto: "Alfa", id_usuario_lider: 1 },
-    { id_usuario: 5, usuario: "Natalia", proyecto: "Alfa", id_usuario_lider: 2},
+    { id_usuario: 5, usuario: "Natalia", proyecto: "Alfa", id_usuario_lider: 2 },
     { id_usuario: 6, usuario: "Borja", proyecto: "Alfa", id_usuario_lider: 2 },
     { id_usuario: 7, usuario: "Pablo", proyecto: "Alfa", id_usuario_lider: 2 },
     { id_usuario: 8, usuario: "Ramón", proyecto: "Alfa", id_usuario_lider: 2 },
@@ -689,6 +689,7 @@ function createTask(proyecto, tarea, fecha, horas, detalle = '') {
     return {
         id_tarea: getNextTaskId(),
         id_usuario: 1,
+        usuario: "Daniel",
         centro_de_costo: "IT",
         proyecto: proyecto,
         tarea: tarea,
