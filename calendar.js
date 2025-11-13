@@ -511,6 +511,12 @@ function renderCalendar(year, month) {
         });
     }
 
+    // Obtener la fecha de hoy
+    const now = new Date();
+    const currentDay = now.getDate();
+    const currentMonth = now.getMonth() + 1; // Enero es 0 en JS, sumamos 1
+    const currentYear = now.getFullYear();
+
     // Crear semanas
     for (let week = 0; week < daysToShow.length / 7; week++) {
         const weekDiv = document.createElement('div');
@@ -523,6 +529,12 @@ function renderCalendar(year, month) {
             const dayData = daysToShow[dayIndex];
             const dayDiv = document.createElement('div');
             dayDiv.className = 'calendar-day';
+
+            if (dayData.day === currentDay &&
+                dayData.month === currentMonth &&
+                dayData.year === currentYear) {
+                dayDiv.style.backgroundColor = '#e2f2ff';
+            }
 
             // Determinar si es fin de semana
             // day = 0 (lunes), 1 (martes), 2 (miércoles), 3 (jueves), 4 (viernes), 5 (sábado), 6 (domingo)
